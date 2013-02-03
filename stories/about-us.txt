@@ -1,0 +1,9 @@
+.. title: About Us
+.. slug: about-us
+.. date: 2013/02/03 14:16:29
+.. tags: 
+.. link: 
+.. description: About APU Cyber Security & Forensics Club
+
+
+We are students from Asia Pacific University of Technology & Innovation.
