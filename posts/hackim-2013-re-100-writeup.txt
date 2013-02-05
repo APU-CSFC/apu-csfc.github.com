@@ -1,0 +1,40 @@
+.. title: HackIM 2013 - RE 100 WriteUp
+.. slug: hackim-2013-re-100-writeup
+.. date: 2013/02/06 00:48:27
+.. tags: CTF, nullcon, HackIM, WriteUps
+.. link: 
+.. description: WriteUp for Nullcon HackIM CTF RE 100.
+
+
+RE 1
+Description: - challenge-1 - `challenge.do  <http://ctf.nullcon.net/challenges/RE/RE1/challenge.do>`_
+
+So, upon clicking on the link to the challenge, we were presented with this::
+
+	''=~('('.'?'.'{'.('`'|'%').('['^'-').('`'|'!').('`'|',').'"'.('['^'.').('['^'(').('`'|'%').('{'^'[')
+	.('['^'(').('['^'/').('['^')').('`'|')').('`'|'#').('['^'/').';'.('['^'.').('['^'(').('`'|'%').('{'^
+	'[').('['^',').('`'|'!').('['^')').('`'|'.').('`'|')').('`'|'.').('`'|"'").('['^'(').';'.('`'|')').(
+	'`'|'&').'('.'\\'.'$'.'#'.('`'^'!').('{'^')').('`'^"'").('{'^'-').'='.'='.('^'^('`'|','))."\)".'\\'.
+	'{'.('`'|')').('`'|'&').'('.'\\'.'$'.('`'^'!').('{'^')').('`'^"'").('{'^'-').'['.('^'^('`'|'.')).']'
+	.'.'.'\\'.'$'.('`'^'!').('{'^')').('`'^"'").('{'^'-').'['.('^'^('`'|'/')).']'.('`'|'%').('['^('*')).
+	'\\'.'$'.('`'^'%').('`'^'.').('{'^'-').'\\'.'{'."'".('{'^'.').('{'^'(').('`'^'%').('{'^')')."'".'\\'
+	.'}'.')'.'\\'.'{'.('['^'+').('['^')').('`'|')').('`'|'.').('['^'/').'\\'.'"'.('`'^'&').('`'|(',')).(
+	'`'|'!').('`'|"'").'='."'".('`'^"'").('`'|'/').('`'|',').('`'|'$').('`'|'%').('`'|'.').('`'^('$')).(
+	'`'|'!').('['^'"').('['^'(').('`'^'!').('['^')').('`'|'%').('`'^'"').('`'|'!').('`'|'#').('`'|"\+").
+	"'".'\\'.'"'.'\\'.'}'.'\\'.'}'.'"'.'}'.')');$:='.'^'~';$~='@'|'(';$^=')'^'[';$/='`'|'.';$,='('^"\}";
+
+Upon inspection, MavJS pointed out that it was Perl code. Further hints shed light that it was obfuscated Perl code that we were looking at. So, a little bit of Google searching and I stumbled upon this `site <http://www.commandlinefu.com/commands/view/9711/clean-up-syntax-and-de-obfuscate-perl-script>`_. Following the instructions on the site, I fired up the Terminal and ran the script and deobfuscated Perl code appeared::
+
+	naavinm@naavinm:~/Desktop$ perl -MO=Deparse script.pl | perltidy > newscript.pl
+	script.pl syntax OK
+
+	naavinm@naavinm:~/Desktop$ cat newscript.pl 
+	'' =~
+	/(?{eval"use strict;use warnings;if(\$#ARGV==2)\{if(\$ARGV[0].\$ARGV[1]eq\$ENV\{'USER'\})\{print\"Flag='GoldenDaysAreBack'\"\}\}"})/;
+	$: = 'P';
+	$~ = 'h';
+	$^ = 'r';
+	$/ = 'n';
+	$, = 'U';
+
+And the flag is: **GoldenDaysAreBack**.
