@@ -12,7 +12,7 @@ So, who/what is APU CSFC?
 
 How is `GliderSwirley <https://ctftime.org/team/3132/>`_ associated/affiliated with APU CSFC?
 
-GliderSwirley was formed out of that same university and the same core memebers who runs APU CSFC as well. We were unsatisfied with how there was a lack of Information Security and Forensics awareness, so we thought, the first step towards learning about InfoSec is to participate in CTFs and do InfoSec stuff.
+GliderSwirley was formed out of that same university and the same core members who run APU CSFC as well. We were unsatisfied with how there was a lack of Information Security and Forensics awareness, so we thought, the first step towards learning about InfoSec is to participate in CTFs and do InfoSec stuff.
 
 Thus, GliderSwirley has been participating in CTFs with only 3-4 persons for a little over 3 months and a few months before APU CSFC was officialised/founded in APU. We do welcome other rookie players to collaborate with us as well. :)
 
