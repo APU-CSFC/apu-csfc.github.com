@@ -7,9 +7,9 @@
 
 
 RE 1
-Description: - challenge-1 - `challenge.do  <http://ctf.nullcon.net/challenges/RE/RE1/challenge.do>`_
+Description: - challenge-1 - challenge.do
 
-So, upon clicking on the link to the challenge, we were presented with this::
+So, after downloading *challenge.do* and opening it up, we were presented with this::
 
 	''=~('('.'?'.'{'.('`'|'%').('['^'-').('`'|'!').('`'|',').'"'.('['^'.').('['^'(').('`'|'%').('{'^'[')
 	.('['^'(').('['^'/').('['^')').('`'|')').('`'|'#').('['^'/').';'.('['^'.').('['^'(').('`'|'%').('{'^

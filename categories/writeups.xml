@@ -1,5 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>APU CSFC (WriteUps)</title><link>http://apu-csfc.github.com</link><description>APU Cyber Security &amp; Forensics Club</description><lastBuildDate>Tue, 05 Feb 2013 23:48:07 GMT</lastBuildDate><generator>nikola</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>HackIM 2013 - Web 100 WriteUp</title><link>http://apu-csfc.github.com/posts/hackim-2013-web-100-writeup.html</link><description>&lt;div&gt;&lt;p&gt;Web Security questions, ranging from 1 to 5 are the first category in HackIM. But it isn't neccessary to solve them first before others. So the challenge is presented as:&lt;/p&gt;
+<rss version="2.0"><channel><title>APU CSFC (WriteUps)</title><link>http://apu-csfc.github.com</link><description>APU Cyber Security &amp; Forensics Club</description><lastBuildDate>Wed, 06 Feb 2013 01:26:46 GMT</lastBuildDate><generator>nikola</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>HackIM 2013 - RE 100 WriteUp</title><link>http://apu-csfc.github.com/posts/hackim-2013-re-100-writeup.html</link><description>&lt;div&gt;&lt;p&gt;RE 1
+Description: - challenge-1 - challenge.do&lt;/p&gt;
+&lt;p&gt;So, after downloading &lt;em&gt;challenge.do&lt;/em&gt; and opening it up, we were presented with this:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+''=~('('.'?'.'{'.('`'|'%').('['^'-').('`'|'!').('`'|',').'"'.('['^'.').('['^'(').('`'|'%').('{'^'[')
+.('['^'(').('['^'/').('['^')').('`'|')').('`'|'#').('['^'/').';'.('['^'.').('['^'(').('`'|'%').('{'^
+'[').('['^',').('`'|'!').('['^')').('`'|'.').('`'|')').('`'|'.').('`'|"'").('['^'(').';'.('`'|')').(
+'`'|'&amp;amp;').'('.'\\'.'$'.'#'.('`'^'!').('{'^')').('`'^"'").('{'^'-').'='.'='.('^'^('`'|','))."\)".'\\'.
+'{'.('`'|')').('`'|'&amp;amp;').'('.'\\'.'$'.('`'^'!').('{'^')').('`'^"'").('{'^'-').'['.('^'^('`'|'.')).']'
+.'.'.'\\'.'$'.('`'^'!').('{'^')').('`'^"'").('{'^'-').'['.('^'^('`'|'/')).']'.('`'|'%').('['^('*')).
+'\\'.'$'.('`'^'%').('`'^'.').('{'^'-').'\\'.'{'."'".('{'^'.').('{'^'(').('`'^'%').('{'^')')."'".'\\'
+.'}'.')'.'\\'.'{'.('['^'+').('['^')').('`'|')').('`'|'.').('['^'/').'\\'.'"'.('`'^'&amp;amp;').('`'|(',')).(
+'`'|'!').('`'|"'").'='."'".('`'^"'").('`'|'/').('`'|',').('`'|'$').('`'|'%').('`'|'.').('`'^('$')).(
+'`'|'!').('['^'"').('['^'(').('`'^'!').('['^')').('`'|'%').('`'^'"').('`'|'!').('`'|'#').('`'|"\+").
+"'".'\\'.'"'.'\\'.'}'.'\\'.'}'.'"'.'}'.')');$:='.'^'~';$~='@'|'(';$^=')'^'[';$/='`'|'.';$,='('^"\}";
+&lt;/pre&gt;
+&lt;p&gt;Upon inspection, MavJS pointed out that it was Perl code. Further hints shed light that it was obfuscated Perl code that we were looking at. So, a little bit of Google searching and I stumbled upon this &lt;a class="reference external" href="http://www.commandlinefu.com/commands/view/9711/clean-up-syntax-and-de-obfuscate-perl-script"&gt;site&lt;/a&gt;. Following the instructions on the site, I fired up the Terminal and ran the script and deobfuscated Perl code appeared:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+naavinm@naavinm:~/Desktop$ perl -MO=Deparse script.pl | perltidy &amp;gt; newscript.pl
+script.pl syntax OK
+
+naavinm@naavinm:~/Desktop$ cat newscript.pl
+'' =~
+/(?{eval"use strict;use warnings;if(\$#ARGV==2)\{if(\$ARGV[0].\$ARGV[1]eq\$ENV\{'USER'\})\{print\"Flag='GoldenDaysAreBack'\"\}\}"})/;
+$: = 'P';
+$~ = 'h';
+$^ = 'r';
+$/ = 'n';
+$, = 'U';
+&lt;/pre&gt;
+&lt;p&gt;And the flag is: &lt;strong&gt;GoldenDaysAreBack&lt;/strong&gt;.&lt;/p&gt;
+&lt;/div&gt;</description><guid>http://apu-csfc.github.com/posts/hackim-2013-re-100-writeup.html</guid><pubDate>Wed, 06 Feb 2013 00:48:27 GMT</pubDate></item><item><title>HackIM 2013 - Web 100 WriteUp</title><link>http://apu-csfc.github.com/posts/hackim-2013-web-100-writeup.html</link><description>&lt;div&gt;&lt;p&gt;Web Security questions, ranging from 1 to 5 are the first category in HackIM. But it isn't neccessary to solve them first before others. So the challenge is presented as:&lt;/p&gt;
 &lt;img alt="/galleries/Selection_075.png" src="/galleries/Selection_075.png"&gt;
 &lt;p&gt;It's clear that the &lt;strong&gt;Admin Console&lt;/strong&gt; was meant for us. So we clicked on it! But BAM!
 This showed up,&lt;/p&gt;
@@ -20,7 +51,7 @@ This showed up,&lt;/p&gt;
 &lt;/div&gt;</description><guid>http://apu-csfc.github.com/posts/hackim-2013-web-100-writeup.html</guid><pubDate>Tue, 05 Feb 2013 23:22:38 GMT</pubDate></item><item><title>Another year, another start: Glider Swirley and APU CSFC</title><link>http://apu-csfc.github.com/posts/another-year-another-start-nullcon-hackim-and-glider-swirley.html</link><description>&lt;div&gt;&lt;p&gt;So, who/what is APU CSFC?&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;APU CSFC&lt;/em&gt; - &lt;a class="reference external" href="http://apu.edu.my"&gt;Asia Pacific University of Technology &amp;amp; Innovation&lt;/a&gt;'s &lt;strong&gt;Cyber Security &amp;amp; Forensics Club&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;How is &lt;a class="reference external" href="https://ctftime.org/team/3132/"&gt;GliderSwirley&lt;/a&gt; associated/affiliated with APU CSFC?&lt;/p&gt;
-&lt;p&gt;GliderSwirley was formed out of that same university and the same core memebers who runs APU CSFC as well. We were unsatisfied with how there was a lack of Information Security and Forensics awareness, so we thought, the first step towards learning about InfoSec is to participate in CTFs and do InfoSec stuff.&lt;/p&gt;
+&lt;p&gt;GliderSwirley was formed out of that same university and the same core members who run APU CSFC as well. We were unsatisfied with how there was a lack of Information Security and Forensics awareness, so we thought, the first step towards learning about InfoSec is to participate in CTFs and do InfoSec stuff.&lt;/p&gt;
 &lt;p&gt;Thus, GliderSwirley has been participating in CTFs with only 3-4 persons for a little over 3 months and a few months before APU CSFC was officialised/founded in APU. We do welcome other rookie players to collaborate with us as well. :)&lt;/p&gt;
 &lt;p&gt;The start of this year for GliderSwirley was pretty much &lt;em&gt;awesome&lt;/em&gt;, to be honest, managed to grow to a 6 person team and participated in &lt;a class="reference external" href="http://ctf.nullcon.net/home.php"&gt;nullcon HackIM CTF&lt;/a&gt;, scored 5200 points and placed 23rd overall. Not bad for the 0xn00bs, eh? :P&lt;/p&gt;
 &lt;p&gt;[Note} There will be a series of writeups for the challenges we've managed to solve at HackIM CTF following this post.&lt;/p&gt;
