@@ -1,0 +1,36 @@
+.. title: HackIM 2013 - Web 100 WriteUp
+.. slug: hackim-2013-web-100-writeup
+.. date: 2013/02/05 23:22:38
+.. tags: CTF, nullcon, HackIM, WriteUps
+.. link: 
+.. description: WriteUp for nullcon HackIM CTF Web 100.
+
+
+Web Security questions, ranging from 1 to 5 are the first category in HackIM. But it isn't neccessary to solve them first before others. So the challenge is presented as:
+
+.. image:: /galleries/Selection_075.png
+    :scale: 50
+
+It's clear that the **Admin Console** was meant for us. So we clicked on it! But BAM!
+This showed up,
+
+.. image:: /galleries/Selection_076.png
+    :scale: 50
+    
+That's bad isn't? Well, do some *googling*, as usual about *stackoverflow hacking* cases, and you'd have come across this; `Anatomy of an Attack: How I Hacked StackOverflow  <http://blog.ircmaxell.com/2012/11/anatomy-of-attack-how-i-hacked.html>`_. From the blog post, you'd see that the author mentions not to rely upon **X-Forwarded-For** for anything. Well, there's a hint isn't it. ;)
+
+So, how do we go about hacking that challenge then? It's pretty simple, and most Linux distros already have it by default....
+
+...drum roll please...
+
+Mr. **curl** :D
+
+So here is what we did you exploit it::
+
+    ~$ curl --header "X-Forwarded-For: 127.0.0.1" http://ctf.nullcon.net/challenges/web/web1/getflag.php
+
+After that it will print out::
+
+    ~$ The Flag is DholuBholuareTWINS
+
+Sweet!? :D

@@ -3,10 +3,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <meta charset="utf-8">
-    <meta name="title" content="Test Post | APU CSFC">
-    <meta name="description" content="A Test Post">
+    <meta name="title" content="HackIM 2013 - Web 100 WriteUp | APU CSFC">
+    <meta name="description" content="WriteUp for nullcon HackIM CTF Web 100.">
     <meta name="author" content="admin">
-    <title>Test Post | APU CSFC</title>
+    <title>HackIM 2013 - Web 100 WriteUp | APU CSFC</title>
     <!-- Le styles -->
         <link href="../assets/css/bootstrap.css" rel="stylesheet" type="text/css">
         <link href="../assets/css/rst.css" rel="stylesheet" type="text/css">
@@ -57,7 +57,7 @@
                 
                 
     <li>
-    <a href="test-post.txt" id="sourcelink">Source</a>
+    <a href="hackim-2013-web-100-writeup.txt" id="sourcelink">Source</a>
     </li>
 
                 </ul>
@@ -74,25 +74,45 @@
     
     <div class="postbox">
     
-    <h1>Test Post | APU CSFC</h1>
+    <h1>HackIM 2013 - Web 100 WriteUp | APU CSFC</h1>
 
     <hr>
     <small>
-        Posted: 2013-02-03 14:19
+        Posted: 2013-02-05 23:22
         
 
         
           |  More posts about
-            <a class="tag" href="../categories/apu.html"><span class="badge badge-info">apu</span></a>
+            <a class="tag" href="../categories/ctf.html"><span class="badge badge-info">CTF</span></a>
+            <a class="tag" href="../categories/nullcon.html"><span class="badge badge-info">nullcon</span></a>
+            <a class="tag" href="../categories/hackim.html"><span class="badge badge-info">HackIM</span></a>
+            <a class="tag" href="../categories/writeups.html"><span class="badge badge-info">WriteUps</span></a>
 
     </small>
     <hr>
-    <p>Just a test post to see if this works!</p>
-
+    <div><p>Web Security questions, ranging from 1 to 5 are the first category in HackIM. But it isn't neccessary to solve them first before others. So the challenge is presented as:</p>
+<img alt="/galleries/Selection_075.png" src="../galleries/Selection_075.png">
+<p>It's clear that the <strong>Admin Console</strong> was meant for us. So we clicked on it! But BAM!
+This showed up,</p>
+<img alt="/galleries/Selection_076.png" src="../galleries/Selection_076.png">
+<p>That's bad isn't? Well, do some <em>googling</em>, as usual about <em>stackoverflow hacking</em> cases, and you'd have come across this; <a class="reference external" href="http://blog.ircmaxell.com/2012/11/anatomy-of-attack-how-i-hacked.html">Anatomy of an Attack: How I Hacked StackOverflow</a>. From the blog post, you'd see that the author mentions not to rely upon <strong>X-Forwarded-For</strong> for anything. Well, there's a hint isn't it. ;)</p>
+<p>So, how do we go about hacking that challenge then? It's pretty simple, and most Linux distros already have it by default....</p>
+<p>...drum roll please...</p>
+<p>Mr. <strong>curl</strong> :D</p>
+<p>So here is what we did you exploit it:</p>
+<pre class="literal-block">
+~$ curl --header "X-Forwarded-For: 127.0.0.1" http://ctf.nullcon.net/challenges/web/web1/getflag.php
+</pre>
+<p>After that it will print out:</p>
+<pre class="literal-block">
+~$ The Flag is DholuBholuareTWINS
+</pre>
+<p>Sweet!? :D</p>
+</div>
     
     <ul class="pager">
-        <li class="next">
-            <a href="another-year-another-start-nullcon-hackim-and-glider-swirley.html">Next post →</a>
+        <li class="previous">
+            <a href="another-year-another-start-nullcon-hackim-and-glider-swirley.html">← Previous post</a>
         </li>
     </ul>
 
@@ -100,9 +120,9 @@
         <div id="disqus_thread"></div>
         <script type="text/javascript">
         var disqus_shortname ="False";
-            var disqus_url="http://apu-csfc.github.com/posts/test-post.html";
-        var disqus_title="Test Post";
-        var disqus_identifier="cache/posts/test-post.html";
+            var disqus_url="http://apu-csfc.github.com/posts/hackim-2013-web-100-writeup.html";
+        var disqus_title="HackIM 2013 - Web 100 WriteUp";
+        var disqus_identifier="cache/posts/hackim-2013-web-100-writeup.html";
         var disqus_config = function () { 
             this.language = "en";
         };
