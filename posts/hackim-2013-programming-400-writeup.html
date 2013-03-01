@@ -1,0 +1,232 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta charset="utf-8">
+    <meta name="title" content="HackIM 2013 - Programming 400 WriteUp | APU CSFC">
+    <meta name="description" content="WriteUp for Nullcon HackIM CTF Programming 400">
+    <meta name="author" content="admin">
+    <title>HackIM 2013 - Programming 400 WriteUp | APU CSFC</title>
+    <!-- Le styles -->
+        <link href="../assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/rst.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/code.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/colorbox.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/slides.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/theme.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/bootstrap-responsive.css" rel="stylesheet" type="text/css">
+        <script src="../assets/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+        <script src="../assets/js/jquery.colorbox-min.js" type="text/javascript"></script>
+        <script src="../assets/js/slides.min.jquery.js" type="text/javascript"></script>
+        <script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS (en)" href="../rss.xml">
+
+    
+    
+</head>
+<body>
+<!-- Menubar -->
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+        
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>        
+        
+            <a class="brand" href="../">
+            APU CSFC
+            </a>
+            <!-- Everything you want hidden at 940px or less, place within here -->
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    
+            <li><a href="../archive.html">Archives</a>
+            </li><li><a href="../categories/index.html">Tags</a>
+
+                </li></ul>
+                <ul class="nav pull-right">
+                
+                
+                
+    <li>
+    <a href="hackim-2013-programming-400-writeup.txt" id="sourcelink">Source</a>
+    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Menubar -->
+<div class="container-fluid" id="container-fluid">
+    <!--Body content-->
+    <div class="row-fluid">
+    <div class="span2"></div>
+    <div class="span8">
+    
+    <div class="postbox">
+    
+    <h1>HackIM 2013 - Programming 400 WriteUp | APU CSFC</h1>
+
+    <hr>
+    <small>
+        Posted: 2013-03-02 05:08
+        
+
+        
+          |  More posts about
+            <a class="tag" href="../categories/ctf.html"><span class="badge badge-info">CTF</span></a>
+            <a class="tag" href="../categories/nullcon.html"><span class="badge badge-info">nullcon</span></a>
+            <a class="tag" href="../categories/hackim.html"><span class="badge badge-info">HackIM</span></a>
+            <a class="tag" href="../categories/writeups.html"><span class="badge badge-info">WriteUps</span></a>
+
+    </small>
+    <hr>
+    <div><p><strong>Programming 4 - 400 points</strong></p>
+<p><strong>Description:</strong> interpret and give answer. start reading from left if digit then add the digit. if x then remove it and go back 2 places if y then remove and go front 2 places</p>
+<blockquote>
+<p>example : 12y34x56 answer is 14</p>
+<p>how : 1 + 2 + 5 + 6 = 14</p>
+<p>12y34x5612345678910xy0981235432x4765893x219532y875439664y3x
+2345688x754312x2456x7876554x43y324x6778y7643223457789494x98696763y15348798y765341y1878979</p>
+</blockquote>
+<pre class="literal-block">
+public class FunkyText {
+
+/** * @param args the command line arguments */
+public static void main(String[] args) {
+    // TODO code application logic here
+    String num="12y34x5612345678910xy0981235432x4765893x219532y875439664y3x2345688x754312x2456x7876554x43y324x6778y7643223457789494x98696763y15348798y765341y1878979";
+
+    int total=0;
+    int num_length=num.length();
+    for(int index=0;index&lt;num_length;index++)
+    {
+        System.out.println("index:"+index);
+       switch(num.charAt(index))
+       {
+           case 'x':
+           {
+               num=num.substring(0, index)+num.substring(index+1,num.length());
+               num_length=num.length();
+               index=index-2;
+               break;
+           }
+
+           case 'y':
+           {
+               num=num.substring(0, index)+num.substring(index+1,num.length());
+               num_length=num.length();
+               index=index+2;
+               break;
+           }
+           default:
+           {
+             total=total+(Integer.parseInt(num.substring(index, index+1)));
+           }
+       }
+        System.out.println("The string:"+num);
+        System.out.println("Total:"+total);
+    }
+}
+</pre>
+<p>By using the example of  : 12y34x56 answer is 14 how : 1 + 2 + 5 + 6 = 14. We are able to observe and create a logic by manipulating the character position of the statement itself such in this way that I have decided to use the String data type to manipulate the logic to produce the FLAG.</p>
+<blockquote>
+<table border="1" class="docutils">
+<colgroup>
+<col width="76%">
+<col width="3%">
+<col width="3%">
+<col width="3%">
+<col width="3%">
+<col width="3%">
+<col width="3%">
+<col width="3%">
+<col width="3%">
+</colgroup>
+<tbody valign="top">
+<tr><td>Character position/number:</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+</tr>
+<tr><td>Character:</td>
+<td>1</td>
+<td>2</td>
+<td>y</td>
+<td>3</td>
+<td>4</td>
+<td>x</td>
+<td>5</td>
+<td>6</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<p>Based on figure above, when the switch-case encounters a non-x or y character the program will execute the default statement of</p>
+<pre class="literal-block">
+"total=total+(Integer.parseInt(num.substring(index, index+1)));"
+</pre>
+<p>where by converting the character within the string at the character position into an integer data type and add the following digit into the total variable. Meanwhile, if the switch-case either meets an x character the following statement occurs:</p>
+<pre class="literal-block">
+num=num.substring(0, index)+num.substring(index+1,num.length());
+num_length=num.length();
+index=index-2;
+</pre>
+<p>Translation, the program will create a new string that will override the previous string with the deletion of the "x" character at that particular character position and at the same time moves back 2 spaces in the character position index. Same situation occurs in "y" except the character position is moved 2 spaces front. Thus once the program has reached the end, the FLAG sum is printed.</p>
+<p>The flag is: <strong>557</strong></p>
+</div>
+    
+    <ul class="pager">
+        <li class="previous">
+            <a href="hackim-2013-programming-300-writeup.html">← Previous post</a>
+        </li>
+    </ul>
+
+    
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+        var disqus_shortname ="apu-csfc";
+            var disqus_url="http://apu-csfc.github.com/posts/hackim-2013-programming-400-writeup.html";
+        var disqus_title="HackIM 2013 - Programming 400 WriteUp";
+        var disqus_identifier="cache/posts/hackim-2013-programming-400-writeup.html";
+        var disqus_config = function () { 
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    </div>
+
+    </div>
+    </div> 
+    <!--End of body content-->
+</div>
+<div class="footerbox">
+    Contents © 2013 <a href="mailto:apuiac@gmail.com">admin</a> - Powered by <a href="http://nikola.ralsina.com.ar">Nikola</a>
+</div>
+
+
+
+    
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"80%",maxHeight:"80%",scalePhotos:true});</script>
+</body>
+</html>

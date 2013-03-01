@@ -1,0 +1,81 @@
+.. title: HackIM 2013 - Programming 400 WriteUp
+.. slug: hackim-2013-programming-400-writeup
+.. date: 2013/03/02 05:08:00
+.. tags: CTF, nullcon, HackIM, WriteUps 
+.. link: 
+.. description: WriteUp for Nullcon HackIM CTF Programming 400
+
+**Programming 4 - 400 points**
+
+**Description:** interpret and give answer. start reading from left if digit then add the digit. if x then remove it and go back 2 places if y then remove and go front 2 places 
+
+    example : 12y34x56 answer is 14
+    
+    how : 1 + 2 + 5 + 6 = 14
+
+    12y34x5612345678910xy0981235432x4765893x219532y875439664y3x
+    2345688x754312x2456x7876554x43y324x6778y7643223457789494x98696763y15348798y765341y1878979
+
+::
+
+    public class FunkyText {
+
+    /** * @param args the command line arguments */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        String num="12y34x5612345678910xy0981235432x4765893x219532y875439664y3x2345688x754312x2456x7876554x43y324x6778y7643223457789494x98696763y15348798y765341y1878979";
+
+        int total=0;
+        int num_length=num.length();
+        for(int index=0;index<num_length;index++)
+        {
+            System.out.println("index:"+index);
+           switch(num.charAt(index))
+           {    
+               case 'x':
+               {
+                   num=num.substring(0, index)+num.substring(index+1,num.length());
+                   num_length=num.length();
+                   index=index-2;
+                   break;
+               }
+
+               case 'y':
+               {
+                   num=num.substring(0, index)+num.substring(index+1,num.length());
+                   num_length=num.length();
+                   index=index+2;
+                   break; 
+               }
+               default:
+               {
+                 total=total+(Integer.parseInt(num.substring(index, index+1)));  
+               }
+           }
+            System.out.println("The string:"+num);
+            System.out.println("Total:"+total); 
+        }
+    }
+
+By using the example of  : 12y34x56 answer is 14 how : 1 + 2 + 5 + 6 = 14. We are able to observe and create a logic by manipulating the character position of the statement itself such in this way that I have decided to use the String data type to manipulate the logic to produce the FLAG.
+
+    +--------------------------+-+-+-+-+-+-+-+-+
+    |Character position/number:|0|1|2|3|4|5|6|7|
+    +--------------------------+-+-+-+-+-+-+-+-+
+    |Character:                |1|2|y|3|4|x|5|6|
+    +--------------------------+-+-+-+-+-+-+-+-+
+
+Based on figure above, when the switch-case encounters a non-x or y character the program will execute the default statement of
+::
+    
+    "total=total+(Integer.parseInt(num.substring(index, index+1)));" 
+    
+where by converting the character within the string at the character position into an integer data type and add the following digit into the total variable. Meanwhile, if the switch-case either meets an x character the following statement occurs::
+
+    num=num.substring(0, index)+num.substring(index+1,num.length());
+    num_length=num.length();
+    index=index-2;
+
+Translation, the program will create a new string that will override the previous string with the deletion of the "x" character at that particular character position and at the same time moves back 2 spaces in the character position index. Same situation occurs in "y" except the character position is moved 2 spaces front. Thus once the program has reached the end, the FLAG sum is printed.
+
+The flag is: **557**

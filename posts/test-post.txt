@@ -1,9 +1,0 @@
-.. title: Test Post
-.. slug: test-post
-.. date: 2013/02/03 14:19:33
-.. tags: apu
-.. link: 
-.. description: A Test Post
-
-
-Just a test post to see if this works!

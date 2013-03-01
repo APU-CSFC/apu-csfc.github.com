@@ -1,0 +1,164 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta charset="utf-8">
+    <meta name="title" content="HackIM 2013 - Programming 300 WriteUp | APU CSFC">
+    <meta name="description" content="WriteUp for Nullcon HackIM CTF Programming 300">
+    <meta name="author" content="admin">
+    <title>HackIM 2013 - Programming 300 WriteUp | APU CSFC</title>
+    <!-- Le styles -->
+        <link href="../assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/rst.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/code.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/colorbox.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/slides.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/theme.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/bootstrap-responsive.css" rel="stylesheet" type="text/css">
+        <script src="../assets/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+        <script src="../assets/js/jquery.colorbox-min.js" type="text/javascript"></script>
+        <script src="../assets/js/slides.min.jquery.js" type="text/javascript"></script>
+        <script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS (en)" href="../rss.xml">
+
+    
+    
+</head>
+<body>
+<!-- Menubar -->
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+        
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>        
+        
+            <a class="brand" href="../">
+            APU CSFC
+            </a>
+            <!-- Everything you want hidden at 940px or less, place within here -->
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    
+            <li><a href="../archive.html">Archives</a>
+            </li><li><a href="../categories/index.html">Tags</a>
+
+                </li></ul>
+                <ul class="nav pull-right">
+                
+                
+                
+    <li>
+    <a href="hackim-2013-programming-300-writeup.txt" id="sourcelink">Source</a>
+    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Menubar -->
+<div class="container-fluid" id="container-fluid">
+    <!--Body content-->
+    <div class="row-fluid">
+    <div class="span2"></div>
+    <div class="span8">
+    
+    <div class="postbox">
+    
+    <h1>HackIM 2013 - Programming 300 WriteUp | APU CSFC</h1>
+
+    <hr>
+    <small>
+        Posted: 2013-03-02 05:00
+        
+
+        
+          |  More posts about
+            <a class="tag" href="../categories/ctf.html"><span class="badge badge-info">CTF</span></a>
+            <a class="tag" href="../categories/nullcon.html"><span class="badge badge-info">nullcon</span></a>
+            <a class="tag" href="../categories/hackim.html"><span class="badge badge-info">HackIM</span></a>
+            <a class="tag" href="../categories/writeups.html"><span class="badge badge-info">WriteUps</span></a>
+
+    </small>
+    <hr>
+    <div><p><strong>Programming 3 - 300 points</strong></p>
+<p><strong>Description:</strong> So our folks wanted to work on binomial series but they understood incorrectly so they made a series of this type.
+if series is for 10 numbers</p>
+<pre class="literal-block">
+10/1 + 9/2 + 8/3 ..... 1/10 = 22.218
+round to 2 decimal place = 22.21
+</pre>
+<p>now they did calculated this series for 31337 numbers can you help these guys in finding the number again.</p>
+<pre class="literal-block">
+public class Binomial {
+    static final int number=31337; // The binominal value that we are searching for based on the requirements.
+    /** * @param args the command line arguments */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        double sum=0; // sum is declared and initialised with the value of zero.
+        for(int ctr=1;ctr&lt;=number;ctr++)
+        {
+            sum=sum+(((number+1)-ctr)/ctr);  // The method of calculation used.
+    // e.g.  Term 1: sum=0+(((31337+1)-1)/1),
+    // Term 2: sum=31337+(((31337+1)-2)/2), ...,
+    //Term 31337: sum=311180.64640351594+(((31337+1)-31337)/31337)
+        }
+        System.out.printf("%.2f\n",sum); // Round off to two decimal places.
+    }
+}
+</pre>
+<p>The flag is: <strong>311180.65</strong></p>
+</div>
+    
+    <ul class="pager">
+        <li class="previous">
+            <a href="hackim-2013-prog1-writeup.html">← Previous post</a>
+        </li>
+        <li class="next">
+            <a href="hackim-2013-programming-400-writeup.html">Next post →</a>
+        </li>
+    </ul>
+
+    
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+        var disqus_shortname ="apu-csfc";
+            var disqus_url="http://apu-csfc.github.com/posts/hackim-2013-programming-300-writeup.html";
+        var disqus_title="HackIM 2013 - Programming 300 WriteUp";
+        var disqus_identifier="cache/posts/hackim-2013-programming-300-writeup.html";
+        var disqus_config = function () { 
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    </div>
+
+    </div>
+    </div> 
+    <!--End of body content-->
+</div>
+<div class="footerbox">
+    Contents © 2013 <a href="mailto:apuiac@gmail.com">admin</a> - Powered by <a href="http://nikola.ralsina.com.ar">Nikola</a>
+</div>
+
+
+
+    
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"80%",maxHeight:"80%",scalePhotos:true});</script>
+</body>
+</html>

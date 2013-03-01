@@ -1,0 +1,45 @@
+.. title: HackIM 2013 - Programming 100 WriteUp
+.. slug: hackim-2013-prog1-writeup
+.. date: 2013/03/02 04:36:41
+.. tags: CTF, nullcon, HackIM, WriteUps 
+.. link: 
+.. description: WriteUp for Nullcon HackIM CTF Programming 100
+
+**Programming 1 - 100 points**
+
+**Description:** Calculate 150000th Fibonacci series, and flag is sum of the alternate numbers from answers.
+
+We interpreted the question as: *Calculate 150000th Fibonacci series*, rather than the original. ;)
+::
+
+    package fibonacchi;
+
+    import java.io.File;
+    import java.io.PrintWriter;
+    import java.math.BigInteger;
+
+    final static int Fibonacchi_term=150000; // The Term that we are looking for. 
+
+    public class Fibonacchi {
+
+        /** * @param args the command line arguments  */
+        public static void main(String[] args) throws Exception {
+            // TODO code application logic here
+            BigInteger obj1 = new BigInteger("0"); // Fibonachi's First Term
+            BigInteger obj2 = new BigInteger("1"); // Fibonachi's Second Term
+            BigInteger obj3; // Fibonachi's Third term and so on until 150,000's Term
+            obj3=obj2.add(obj1);
+            for(int n=1;n<=(Fibonacchi_term-2);n++) // 150,000 Term - 2 which is stated from obj1 and obj2 from the beginning which is 0 and 1.
+            {
+                obj1=obj2;
+                obj2=obj3;
+                obj3=obj2.add(obj1);
+            }
+            File fileobj = new File("output.txt"); // Exporting the result to an external file named output.txt, reason being the number is huge.
+            PrintWriter output=new PrintWriter(fileobj); 
+            output.println(obj3); // Print the result of the term into the file.
+            output.close();
+        }
+    }
+
+The reason being that **BigInteger** was implemented in this code instead of using either **int**, **double** or **long** is because is to prevent an **overflow** due to the huge number that it is produced at the end of the term's calculation (The maximum value of the data type of long is 9223372036854775807, hence anything higher causes an overflow which in result producing inaccurate answer/FLAG). Therefore, **BigInteger** is used due to the fact it is able to adjust its size to accommodate the value of the calculation and produce the final answer/FLAG without facing any overflow.

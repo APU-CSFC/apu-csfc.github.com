@@ -3,10 +3,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <meta charset="utf-8">
-    <meta name="title" content="Test Post | APU CSFC">
-    <meta name="description" content="A Test Post">
+    <meta name="title" content="HackIM 2013 - Programming 100 WriteUp | APU CSFC">
+    <meta name="description" content="WriteUp for Nullcon HackIM CTF Programming 100">
     <meta name="author" content="admin">
-    <title>Test Post | APU CSFC</title>
+    <title>HackIM 2013 - Programming 100 WriteUp | APU CSFC</title>
     <!-- Le styles -->
         <link href="../assets/css/bootstrap.css" rel="stylesheet" type="text/css">
         <link href="../assets/css/rst.css" rel="stylesheet" type="text/css">
@@ -57,7 +57,7 @@
                 
                 
     <li>
-    <a href="test-post.txt" id="sourcelink">Source</a>
+    <a href="hackim-2013-prog1-writeup.txt" id="sourcelink">Source</a>
     </li>
 
                 </ul>
@@ -74,35 +74,75 @@
     
     <div class="postbox">
     
-    <h1>Test Post | APU CSFC</h1>
+    <h1>HackIM 2013 - Programming 100 WriteUp | APU CSFC</h1>
 
     <hr>
     <small>
-        Posted: 2013-02-03 14:19
+        Posted: 2013-03-02 04:36
         
 
         
           |  More posts about
-            <a class="tag" href="../categories/apu.html"><span class="badge badge-info">apu</span></a>
+            <a class="tag" href="../categories/ctf.html"><span class="badge badge-info">CTF</span></a>
+            <a class="tag" href="../categories/nullcon.html"><span class="badge badge-info">nullcon</span></a>
+            <a class="tag" href="../categories/hackim.html"><span class="badge badge-info">HackIM</span></a>
+            <a class="tag" href="../categories/writeups.html"><span class="badge badge-info">WriteUps</span></a>
 
     </small>
     <hr>
-    <p>Just a test post to see if this works!</p>
+    <div><p><strong>Programming 1 - 100 points</strong></p>
+<p><strong>Description:</strong> Calculate 150000th Fibonacci series, and flag is sum of the alternate numbers from answers.</p>
+<p>We interpreted the question as: <em>Calculate 150000th Fibonacci series</em>, rather than the original. ;)</p>
+<pre class="literal-block">
+package fibonacchi;
 
+import java.io.File;
+import java.io.PrintWriter;
+import java.math.BigInteger;
+
+final static int Fibonacchi_term=150000; // The Term that we are looking for.
+
+public class Fibonacchi {
+
+    /** * @param args the command line arguments  */
+    public static void main(String[] args) throws Exception {
+        // TODO code application logic here
+        BigInteger obj1 = new BigInteger("0"); // Fibonachi's First Term
+        BigInteger obj2 = new BigInteger("1"); // Fibonachi's Second Term
+        BigInteger obj3; // Fibonachi's Third term and so on until 150,000's Term
+        obj3=obj2.add(obj1);
+        for(int n=1;n&lt;=(Fibonacchi_term-2);n++) // 150,000 Term - 2 which is stated from obj1 and obj2 from the beginning which is 0 and 1.
+        {
+            obj1=obj2;
+            obj2=obj3;
+            obj3=obj2.add(obj1);
+        }
+        File fileobj = new File("output.txt"); // Exporting the result to an external file named output.txt, reason being the number is huge.
+        PrintWriter output=new PrintWriter(fileobj);
+        output.println(obj3); // Print the result of the term into the file.
+        output.close();
+    }
+}
+</pre>
+<p>The reason being that <strong>BigInteger</strong> was implemented in this code instead of using either <strong>int</strong>, <strong>double</strong> or <strong>long</strong> is because is to prevent an <strong>overflow</strong> due to the huge number that it is produced at the end of the term's calculation (The maximum value of the data type of long is 9223372036854775807, hence anything higher causes an overflow which in result producing inaccurate answer/FLAG). Therefore, <strong>BigInteger</strong> is used due to the fact it is able to adjust its size to accommodate the value of the calculation and produce the final answer/FLAG without facing any overflow.</p>
+</div>
     
     <ul class="pager">
+        <li class="previous">
+            <a href="hackim-2013-re-100-writeup.html">← Previous post</a>
+        </li>
         <li class="next">
-            <a href="another-year-another-start-nullcon-hackim-and-glider-swirley.html">Next post →</a>
+            <a href="hackim-2013-programming-300-writeup.html">Next post →</a>
         </li>
     </ul>
 
     
         <div id="disqus_thread"></div>
         <script type="text/javascript">
-        var disqus_shortname ="False";
-            var disqus_url="http://apu-csfc.github.com/posts/test-post.html";
-        var disqus_title="Test Post";
-        var disqus_identifier="cache/posts/test-post.html";
+        var disqus_shortname ="apu-csfc";
+            var disqus_url="http://apu-csfc.github.com/posts/hackim-2013-prog1-writeup.html";
+        var disqus_title="HackIM 2013 - Programming 100 WriteUp";
+        var disqus_identifier="cache/posts/hackim-2013-programming-100-writeup.html";
         var disqus_config = function () { 
             this.language = "en";
         };
