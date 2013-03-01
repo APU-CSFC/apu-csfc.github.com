@@ -1,0 +1,382 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta charset="utf-8">
+    <meta name="title" content="APU CSFC">
+    <meta name="description" content="APU Cyber Security &amp; Forensics Club">
+    <meta name="author" content="admin">
+    <title>APU CSFC</title>
+    <!-- Le styles -->
+        <link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+        <link href="assets/css/rst.css" rel="stylesheet" type="text/css">
+        <link href="assets/css/code.css" rel="stylesheet" type="text/css">
+        <link href="assets/css/colorbox.css" rel="stylesheet" type="text/css">
+        <link href="assets/css/slides.css" rel="stylesheet" type="text/css">
+        <link href="assets/css/theme.css" rel="stylesheet" type="text/css">
+        <link href="assets/css/bootstrap-responsive.css" rel="stylesheet" type="text/css">
+        <script src="assets/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+        <script src="assets/js/jquery.colorbox-min.js" type="text/javascript"></script>
+        <script src="assets/js/slides.min.jquery.js" type="text/javascript"></script>
+        <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS (en)" href="rss.xml">
+
+    
+    
+</head>
+<body>
+<!-- Menubar -->
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+        
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>        
+        
+            <a class="brand" href=".">
+            APU CSFC
+            </a>
+            <!-- Everything you want hidden at 940px or less, place within here -->
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    
+            <li><a href="archive.html">Archives</a>
+            </li><li><a href="categories/index.html">Tags</a>
+
+                </li></ul>
+                <ul class="nav pull-right">
+                
+                
+                 
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Menubar -->
+<div class="container-fluid" id="container-fluid">
+    <!--Body content-->
+    <div class="row-fluid">
+    <div class="span2"></div>
+    <div class="span8">
+    
+        <div class="postbox">
+        <h1><a href="posts/hackim-2013-programming-400-writeup.html">HackIM 2013 - Programming 400 WriteUp</a>
+        <small>  
+             Posted: 2013-03-02 05:08
+        </small></h1>
+        <hr>
+        <div><p><strong>Programming 4 - 400 points</strong></p>
+<p><strong>Description:</strong> interpret and give answer. start reading from left if digit then add the digit. if x then remove it and go back 2 places if y then remove and go front 2 places</p>
+<blockquote>
+<p>example : 12y34x56 answer is 14</p>
+<p>how : 1 + 2 + 5 + 6 = 14</p>
+<p>12y34x5612345678910xy0981235432x4765893x219532y875439664y3x
+2345688x754312x2456x7876554x43y324x6778y7643223457789494x98696763y15348798y765341y1878979</p>
+</blockquote>
+<pre class="literal-block">
+public class FunkyText {
+
+/** * @param args the command line arguments */
+public static void main(String[] args) {
+    // TODO code application logic here
+    String num="12y34x5612345678910xy0981235432x4765893x219532y875439664y3x2345688x754312x2456x7876554x43y324x6778y7643223457789494x98696763y15348798y765341y1878979";
+
+    int total=0;
+    int num_length=num.length();
+    for(int index=0;index&lt;num_length;index++)
+    {
+        System.out.println("index:"+index);
+       switch(num.charAt(index))
+       {
+           case 'x':
+           {
+               num=num.substring(0, index)+num.substring(index+1,num.length());
+               num_length=num.length();
+               index=index-2;
+               break;
+           }
+
+           case 'y':
+           {
+               num=num.substring(0, index)+num.substring(index+1,num.length());
+               num_length=num.length();
+               index=index+2;
+               break;
+           }
+           default:
+           {
+             total=total+(Integer.parseInt(num.substring(index, index+1)));
+           }
+       }
+        System.out.println("The string:"+num);
+        System.out.println("Total:"+total);
+    }
+}
+</pre>
+<p>By using the example of  : 12y34x56 answer is 14 how : 1 + 2 + 5 + 6 = 14. We are able to observe and create a logic by manipulating the character position of the statement itself such in this way that I have decided to use the String data type to manipulate the logic to produce the FLAG.</p>
+<blockquote>
+<table border="1" class="docutils">
+<colgroup>
+<col width="76%">
+<col width="3%">
+<col width="3%">
+<col width="3%">
+<col width="3%">
+<col width="3%">
+<col width="3%">
+<col width="3%">
+<col width="3%">
+</colgroup>
+<tbody valign="top">
+<tr><td>Character position/number:</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+</tr>
+<tr><td>Character:</td>
+<td>1</td>
+<td>2</td>
+<td>y</td>
+<td>3</td>
+<td>4</td>
+<td>x</td>
+<td>5</td>
+<td>6</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<p>Based on figure above, when the switch-case encounters a non-x or y character the program will execute the default statement of</p>
+<pre class="literal-block">
+"total=total+(Integer.parseInt(num.substring(index, index+1)));"
+</pre>
+<p>where by converting the character within the string at the character position into an integer data type and add the following digit into the total variable. Meanwhile, if the switch-case either meets an x character the following statement occurs:</p>
+<pre class="literal-block">
+num=num.substring(0, index)+num.substring(index+1,num.length());
+num_length=num.length();
+index=index-2;
+</pre>
+<p>Translation, the program will create a new string that will override the previous string with the deletion of the "x" character at that particular character position and at the same time moves back 2 spaces in the character position index. Same situation occurs in "y" except the character position is moved 2 spaces front. Thus once the program has reached the end, the FLAG sum is printed.</p>
+<p>The flag is: <strong>557</strong></p>
+</div>
+        
+    <p>
+        <a href="posts/hackim-2013-programming-400-writeup.html#disqus_thread" data-disqus-identifier="cache/posts/hackim-2013-programming-400-writeup.html">Comments</a>
+
+        </p></div>
+        <div class="postbox">
+        <h1><a href="posts/hackim-2013-programming-300-writeup.html">HackIM 2013 - Programming 300 WriteUp</a>
+        <small>  
+             Posted: 2013-03-02 05:00
+        </small></h1>
+        <hr>
+        <div><p><strong>Programming 3 - 300 points</strong></p>
+<p><strong>Description:</strong> So our folks wanted to work on binomial series but they understood incorrectly so they made a series of this type.
+if series is for 10 numbers</p>
+<pre class="literal-block">
+10/1 + 9/2 + 8/3 ..... 1/10 = 22.218
+round to 2 decimal place = 22.21
+</pre>
+<p>now they did calculated this series for 31337 numbers can you help these guys in finding the number again.</p>
+<pre class="literal-block">
+public class Binomial {
+    static final int number=31337; // The binominal value that we are searching for based on the requirements.
+    /** * @param args the command line arguments */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        double sum=0; // sum is declared and initialised with the value of zero.
+        for(int ctr=1;ctr&lt;=number;ctr++)
+        {
+            sum=sum+(((number+1)-ctr)/ctr);  // The method of calculation used.
+    // e.g.  Term 1: sum=0+(((31337+1)-1)/1),
+    // Term 2: sum=31337+(((31337+1)-2)/2), ...,
+    //Term 31337: sum=311180.64640351594+(((31337+1)-31337)/31337)
+        }
+        System.out.printf("%.2f\n",sum); // Round off to two decimal places.
+    }
+}
+</pre>
+<p>The flag is: <strong>311180.65</strong></p>
+</div>
+        
+    <p>
+        <a href="posts/hackim-2013-programming-300-writeup.html#disqus_thread" data-disqus-identifier="cache/posts/hackim-2013-programming-300-writeup.html">Comments</a>
+
+        </p></div>
+        <div class="postbox">
+        <h1><a href="posts/hackim-2013-prog1-writeup.html">HackIM 2013 - Programming 100 WriteUp</a>
+        <small>  
+             Posted: 2013-03-02 04:36
+        </small></h1>
+        <hr>
+        <div><p><strong>Programming 1 - 100 points</strong></p>
+<p><strong>Description:</strong> Calculate 150000th Fibonacci series, and flag is sum of the alternate numbers from answers.</p>
+<p>We interpreted the question as: <em>Calculate 150000th Fibonacci series</em>, rather than the original. ;)</p>
+<pre class="literal-block">
+package fibonacchi;
+
+import java.io.File;
+import java.io.PrintWriter;
+import java.math.BigInteger;
+
+final static int Fibonacchi_term=150000; // The Term that we are looking for.
+
+public class Fibonacchi {
+
+    /** * @param args the command line arguments  */
+    public static void main(String[] args) throws Exception {
+        // TODO code application logic here
+        BigInteger obj1 = new BigInteger("0"); // Fibonachi's First Term
+        BigInteger obj2 = new BigInteger("1"); // Fibonachi's Second Term
+        BigInteger obj3; // Fibonachi's Third term and so on until 150,000's Term
+        obj3=obj2.add(obj1);
+        for(int n=1;n&lt;=(Fibonacchi_term-2);n++) // 150,000 Term - 2 which is stated from obj1 and obj2 from the beginning which is 0 and 1.
+        {
+            obj1=obj2;
+            obj2=obj3;
+            obj3=obj2.add(obj1);
+        }
+        File fileobj = new File("output.txt"); // Exporting the result to an external file named output.txt, reason being the number is huge.
+        PrintWriter output=new PrintWriter(fileobj);
+        output.println(obj3); // Print the result of the term into the file.
+        output.close();
+    }
+}
+</pre>
+<p>The reason being that <strong>BigInteger</strong> was implemented in this code instead of using either <strong>int</strong>, <strong>double</strong> or <strong>long</strong> is because is to prevent an <strong>overflow</strong> due to the huge number that it is produced at the end of the term's calculation (The maximum value of the data type of long is 9223372036854775807, hence anything higher causes an overflow which in result producing inaccurate answer/FLAG). Therefore, <strong>BigInteger</strong> is used due to the fact it is able to adjust its size to accommodate the value of the calculation and produce the final answer/FLAG without facing any overflow.</p>
+</div>
+        
+    <p>
+        <a href="posts/hackim-2013-prog1-writeup.html#disqus_thread" data-disqus-identifier="cache/posts/hackim-2013-programming-100-writeup.html">Comments</a>
+
+        </p></div>
+        <div class="postbox">
+        <h1><a href="posts/hackim-2013-re-100-writeup.html">HackIM 2013 - RE 100 WriteUp</a>
+        <small>  
+             Posted: 2013-02-06 00:48
+        </small></h1>
+        <hr>
+        <div><p>RE 1
+Description: - challenge-1 - challenge.do</p>
+<p>So, after downloading <em>challenge.do</em> and opening it up, we were presented with this:</p>
+<pre class="literal-block">
+''=~('('.'?'.'{'.('`'|'%').('['^'-').('`'|'!').('`'|',').'"'.('['^'.').('['^'(').('`'|'%').('{'^'[')
+.('['^'(').('['^'/').('['^')').('`'|')').('`'|'#').('['^'/').';'.('['^'.').('['^'(').('`'|'%').('{'^
+'[').('['^',').('`'|'!').('['^')').('`'|'.').('`'|')').('`'|'.').('`'|"'").('['^'(').';'.('`'|')').(
+'`'|'&amp;').'('.'\\'.'$'.'#'.('`'^'!').('{'^')').('`'^"'").('{'^'-').'='.'='.('^'^('`'|','))."\)".'\\'.
+'{'.('`'|')').('`'|'&amp;').'('.'\\'.'$'.('`'^'!').('{'^')').('`'^"'").('{'^'-').'['.('^'^('`'|'.')).']'
+.'.'.'\\'.'$'.('`'^'!').('{'^')').('`'^"'").('{'^'-').'['.('^'^('`'|'/')).']'.('`'|'%').('['^('*')).
+'\\'.'$'.('`'^'%').('`'^'.').('{'^'-').'\\'.'{'."'".('{'^'.').('{'^'(').('`'^'%').('{'^')')."'".'\\'
+.'}'.')'.'\\'.'{'.('['^'+').('['^')').('`'|')').('`'|'.').('['^'/').'\\'.'"'.('`'^'&amp;').('`'|(',')).(
+'`'|'!').('`'|"'").'='."'".('`'^"'").('`'|'/').('`'|',').('`'|'$').('`'|'%').('`'|'.').('`'^('$')).(
+'`'|'!').('['^'"').('['^'(').('`'^'!').('['^')').('`'|'%').('`'^'"').('`'|'!').('`'|'#').('`'|"\+").
+"'".'\\'.'"'.'\\'.'}'.'\\'.'}'.'"'.'}'.')');$:='.'^'~';$~='@'|'(';$^=')'^'[';$/='`'|'.';$,='('^"\}";
+</pre>
+<p>Upon inspection, MavJS pointed out that it was Perl code. Further hints shed light that it was obfuscated Perl code that we were looking at. So, a little bit of Google searching and I stumbled upon this <a class="reference external" href="http://www.commandlinefu.com/commands/view/9711/clean-up-syntax-and-de-obfuscate-perl-script">site</a>. Following the instructions on the site, I fired up the Terminal and ran the script and deobfuscated Perl code appeared:</p>
+<pre class="literal-block">
+naavinm@naavinm:~/Desktop$ perl -MO=Deparse script.pl | perltidy &gt; newscript.pl
+script.pl syntax OK
+
+naavinm@naavinm:~/Desktop$ cat newscript.pl
+'' =~
+/(?{eval"use strict;use warnings;if(\$#ARGV==2)\{if(\$ARGV[0].\$ARGV[1]eq\$ENV\{'USER'\})\{print\"Flag='GoldenDaysAreBack'\"\}\}"})/;
+$: = 'P';
+$~ = 'h';
+$^ = 'r';
+$/ = 'n';
+$, = 'U';
+</pre>
+<p>And the flag is: <strong>GoldenDaysAreBack</strong>.</p>
+</div>
+        
+    <p>
+        <a href="posts/hackim-2013-re-100-writeup.html#disqus_thread" data-disqus-identifier="cache/posts/hackim-2013-re-100-writeup.html">Comments</a>
+
+        </p></div>
+        <div class="postbox">
+        <h1><a href="posts/hackim-2013-web-100-writeup.html">HackIM 2013 - Web 100 WriteUp</a>
+        <small>  
+             Posted: 2013-02-05 23:22
+        </small></h1>
+        <hr>
+        <div><p>Web Security questions, ranging from 1 to 5 are the first category in HackIM. But it isn't neccessary to solve them first before others. So the challenge is presented as:</p>
+<img alt="/galleries/Selection_075.png" src="galleries/Selection_075.png">
+<p>It's clear that the <strong>Admin Console</strong> was meant for us. So we clicked on it! But BAM!
+This showed up,</p>
+<img alt="/galleries/Selection_076.png" src="galleries/Selection_076.png">
+<p>That's bad isn't? Well, do some <em>googling</em>, as usual about <em>stackoverflow hacking</em> cases, and you'd have come across this; <a class="reference external" href="http://blog.ircmaxell.com/2012/11/anatomy-of-attack-how-i-hacked.html">Anatomy of an Attack: How I Hacked StackOverflow</a>. From the blog post, you'd see that the author mentions not to rely upon <strong>X-Forwarded-For</strong> for anything. Well, there's a hint isn't it. ;)</p>
+<p>So, how do we go about hacking that challenge then? It's pretty simple, and most Linux distros already have it by default....</p>
+<p>...drum roll please...</p>
+<p>Mr. <strong>curl</strong> :D</p>
+<p>So here is what we did you exploit it:</p>
+<pre class="literal-block">
+~$ curl --header "X-Forwarded-For: 127.0.0.1" http://ctf.nullcon.net/challenges/web/web1/getflag.php
+</pre>
+<p>After that it will print out:</p>
+<pre class="literal-block">
+~$ The Flag is DholuBholuareTWINS
+</pre>
+<p>Sweet!? :D</p>
+</div>
+        
+    <p>
+        <a href="posts/hackim-2013-web-100-writeup.html#disqus_thread" data-disqus-identifier="cache/posts/hackim-2013-web-100-writeup.html">Comments</a>
+
+        </p></div>
+        <div class="postbox">
+        <h1><a href="posts/another-year-another-start-nullcon-hackim-and-glider-swirley.html">Another year, another start: Glider Swirley and APU CSFC</a>
+        <small>  
+             Posted: 2013-02-05 22:56
+        </small></h1>
+        <hr>
+        <div><p>So, who/what is APU CSFC?</p>
+<p><em>APU CSFC</em> - <a class="reference external" href="http://apu.edu.my">Asia Pacific University of Technology &amp; Innovation</a>'s <strong>Cyber Security &amp; Forensics Club</strong>.</p>
+<p>How is <a class="reference external" href="https://ctftime.org/team/3132/">GliderSwirley</a> associated/affiliated with APU CSFC?</p>
+<p>GliderSwirley was formed out of that same university and the same core members who run APU CSFC as well. We were unsatisfied with how there was a lack of Information Security and Forensics awareness, so we thought, the first step towards learning about InfoSec is to participate in CTFs and do InfoSec stuff.</p>
+<p>Thus, GliderSwirley has been participating in CTFs with only 3-4 persons for a little over 3 months and a few months before APU CSFC was officialised/founded in APU. We do welcome other rookie players to collaborate with us as well. :)</p>
+<p>The start of this year for GliderSwirley was pretty much <em>awesome</em>, to be honest, managed to grow to a 6 person team and participated in <a class="reference external" href="http://ctf.nullcon.net/home.php">nullcon HackIM CTF</a>, scored 5200 points and placed 23rd overall. Not bad for the 0xn00bs, eh? :P</p>
+<p>[Note} There will be a series of writeups for the challenges we've managed to solve at HackIM CTF following this post.</p>
+</div>
+        
+    <p>
+        <a href="posts/another-year-another-start-nullcon-hackim-and-glider-swirley.html#disqus_thread" data-disqus-identifier="cache/posts/another-year-another-start-nullcon-hackim-and-glider-swirley.html">Comments</a>
+
+        </p></div>
+    
+<div>
+<ul class="pager">
+</ul>
+</div>
+
+    
+       <script type="text/javascript">var disqus_shortname="apu-csfc";(function(){var a=document.createElement("script");a.async=true;a.type="text/javascript";a.src="http://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("HEAD")[0]||document.getElementsByTagName("BODY")[0]).appendChild(a)}());</script>
+
+
+    </div>
+    </div> 
+    <!--End of body content-->
+</div>
+<div class="footerbox">
+    Contents © 2013 <a href="mailto:apuiac@gmail.com">admin</a> - Powered by <a href="http://nikola.ralsina.com.ar">Nikola</a>
+</div>
+
+
+
+    
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"80%",maxHeight:"80%",scalePhotos:true});</script>
+</body>
+</html>
