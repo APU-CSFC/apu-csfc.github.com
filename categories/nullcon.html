@@ -70,6 +70,88 @@
     <div class="span8">
     
         <div class="postbox">
+        <h1><a href="../posts/hackim-2013-web-400-writeup.html">HackIM 2013 - Web 400 WriteUp</a>
+        <small>  
+             Posted: 2013-03-02 18:59
+        </small></h1>
+        <hr>
+        <div><p><strong>Web 4 - 400 points</strong></p>
+<p>Again, like <a class="reference external" href="../posts/hackim-2013-web-200-writeup.html">Web 2 - 200 points</a>  and <a class="reference external" href="../posts/hackim-2013-web-300-writeup.html">Web 3 - 300 points</a> we were given a link to the challenge. And this is what it displays:</p>
+<img alt="/galleries/Selection_070.png" src="../galleries/Selection_070.png">
+<p>So, we applied the same technique as <strong>Web 2 - 200 points</strong>, registered as <strong>admin</strong> with our own unique passphrase, and log in. After we login, we were given a mail sending feature:</p>
+<img alt="/galleries/Selection_068.png" src="../galleries/Selection_068.png">
+<p>Here, if you didn't login as admin, you would not be able to use the <strong>Become Admin</strong> and <strong>Get Flag</strong> functions. So, we went right ahead and clicked the <strong>Get Flag</strong> function and this spits out for us:</p>
+<img alt="/galleries/Selection_069.png" src="../galleries/Selection_069.png">
+<p>AWESOMENESS! :)</p>
+</div>
+        
+    <p>
+        <a href="../posts/hackim-2013-web-400-writeup.html#disqus_thread" data-disqus-identifier="cache/posts/hackim-2013-web-400-writeup.html">Comments</a>
+
+        </p></div>
+        <div class="postbox">
+        <h1><a href="../posts/hackim-2013-web-300-writeup.html">HackIM 2013 - Web 300 WriteUp</a>
+        <small>  
+             Posted: 2013-03-02 18:28
+        </small></h1>
+        <hr>
+        <div><p><strong>Web 3 - 300 points</strong></p>
+<p>Again, like <a class="reference external" href="../posts/hackim-2013-web-200-writeup.html">Web 2 - 200 points</a> we were given a link to the challenge. And this is what it displays:</p>
+<img alt="/galleries/Selection_071.png" src="../galleries/Selection_071.png">
+<p>From the page, it seems we are in trouble. But of course, have no fear! We checked the hints and it was given that the hint to this problem was to <strong>enumerate</strong>....now..that's interesting. :)</p>
+<p>So, now, we <em>Google</em>! By googling <strong>enumerate computer</strong> we get (quote from Wikipedia):</p>
+<blockquote>
+A Network enumerator or network scanner is a computer program used to retrieve user names, and info on groups, shares and services of networked computers.</blockquote>
+<p>Now, that gave us the idea of finding the much needed piece of the puzzle using specific filtering of Google searches directed to <em>ctf.nullcon.net</em> :)</p>
+<blockquote>
+site:ctf.nullcon.net inurl:login</blockquote>
+<p>The returned search results pointed us to an interesting phps file. A phps file is a source of the php file. So, from there, we changed the file <strong>login.php</strong> to <strong>login.phps</strong>, and we got this:</p>
+<img alt="/galleries/Selection_072.png" src="../galleries/Selection_072.png">
+<p>By looking at the php source file, we know that the login checks whether there is a variable called <strong>Login</strong> is set in the <strong>POST</strong> request. And since the login page wasn't checking whether the credentials were correct or not, we used curl to solve the challenge as follows:</p>
+<pre class="literal-block">
+curl --cookie "Login=1" http://ctf.nullcon.net/challenges/web/web4/onepage.php
+</pre>
+<p>And the returned response was as follows:</p>
+<pre class="literal-block">
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;The flag is JagguisaNAUGHTYbunder&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>command line tools FTW! :)</p>
+</div>
+        
+    <p>
+        <a href="../posts/hackim-2013-web-300-writeup.html#disqus_thread" data-disqus-identifier="cache/posts/hackim-2013-web-300-writeup.html">Comments</a>
+
+        </p></div>
+        <div class="postbox">
+        <h1><a href="../posts/hackim-2013-web-200-writeup.html">HackIM 2013 - Web 200 WriteUp</a>
+        <small>  
+             Posted: 2013-03-02 18:10
+        </small></h1>
+        <hr>
+        <div><p><strong>Web 2 - 200 points</strong></p>
+<p>We were given a url to the challenge and this is what it displays:</p>
+<img alt="/galleries/Selection_063.png" src="../galleries/Selection_063.png">
+<p>It's quite clear that you either need to know the credentials or to register. So, we chose the <strong>register</strong> route. We first tried logging with our own crafted credentials. But we were unable to <strong>view</strong> the flag that way. Thus, chose to register as admin afterwards. Of course, we chose a password that is unique for us. ;)</p>
+<img alt="/galleries/Selection_064.png" src="../galleries/Selection_064.png">
+<p>And well surprise...it was accepted!! AWESOME!</p>
+<img alt="/galleries/Selection_065.png" src="../galleries/Selection_065.png">
+<p>After we login we can see that the post named <strong>flag</strong> now has an option for us to <strong>view</strong> the post!</p>
+<img alt="/galleries/Selection_066.png" src="../galleries/Selection_066.png">
+<p>So, we clicked on the <strong>view</strong> link and out comes the javascript alert function that gave us the <strong>flag</strong>.</p>
+<p>The flag is: <strong>ChutkiisVERYcute</strong></p>
+</div>
+        
+    <p>
+        <a href="../posts/hackim-2013-web-200-writeup.html#disqus_thread" data-disqus-identifier="cache/posts/hackim-2013-web-200-writeup.html">Comments</a>
+
+        </p></div>
+        <div class="postbox">
         <h1><a href="../posts/hackim-2013-programming-400-writeup.html">HackIM 2013 - Programming 400 WriteUp</a>
         <small>  
              Posted: 2013-03-02 05:08

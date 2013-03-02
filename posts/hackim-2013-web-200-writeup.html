@@ -3,10 +3,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <meta charset="utf-8">
-    <meta name="title" content="HackIM 2013 - Programming 400 WriteUp | APU CSFC">
-    <meta name="description" content="WriteUp for Nullcon HackIM CTF Programming 400">
+    <meta name="title" content="HackIM 2013 - Web 200 WriteUp | APU CSFC">
+    <meta name="description" content="WriteUp for nullcon HackIM CTF Web 200.">
     <meta name="author" content="admin">
-    <title>HackIM 2013 - Programming 400 WriteUp | APU CSFC</title>
+    <title>HackIM 2013 - Web 200 WriteUp | APU CSFC</title>
     <!-- Le styles -->
         <link href="../assets/css/bootstrap.css" rel="stylesheet" type="text/css">
         <link href="../assets/css/rst.css" rel="stylesheet" type="text/css">
@@ -58,7 +58,7 @@
                 
                 
     <li>
-    <a href="hackim-2013-programming-400-writeup.txt" id="sourcelink">Source</a>
+    <a href="hackim-2013-web-200-writeup.txt" id="sourcelink">Source</a>
     </li>
 
                 </ul>
@@ -75,11 +75,11 @@
     
     <div class="postbox">
     
-    <h1>HackIM 2013 - Programming 400 WriteUp | APU CSFC</h1>
+    <h1>HackIM 2013 - Web 200 WriteUp | APU CSFC</h1>
 
     <hr>
     <small>
-        Posted: 2013-03-02 05:08
+        Posted: 2013-03-02 18:10
         
 
         
@@ -91,112 +91,25 @@
 
     </small>
     <hr>
-    <div><p><strong>Programming 4 - 400 points</strong></p>
-<p><strong>Description:</strong> interpret and give answer. start reading from left if digit then add the digit. if x then remove it and go back 2 places if y then remove and go front 2 places</p>
-<blockquote>
-<p>example : 12y34x56 answer is 14</p>
-<p>how : 1 + 2 + 5 + 6 = 14</p>
-<p>12y34x5612345678910xy0981235432x4765893x219532y875439664y3x
-2345688x754312x2456x7876554x43y324x6778y7643223457789494x98696763y15348798y765341y1878979</p>
-</blockquote>
-<pre class="literal-block">
-public class FunkyText {
-
-/** * @param args the command line arguments */
-public static void main(String[] args) {
-    // TODO code application logic here
-    String num="12y34x5612345678910xy0981235432x4765893x219532y875439664y3x2345688x754312x2456x7876554x43y324x6778y7643223457789494x98696763y15348798y765341y1878979";
-
-    int total=0;
-    int num_length=num.length();
-    for(int index=0;index&lt;num_length;index++)
-    {
-        System.out.println("index:"+index);
-       switch(num.charAt(index))
-       {
-           case 'x':
-           {
-               num=num.substring(0, index)+num.substring(index+1,num.length());
-               num_length=num.length();
-               index=index-2;
-               break;
-           }
-
-           case 'y':
-           {
-               num=num.substring(0, index)+num.substring(index+1,num.length());
-               num_length=num.length();
-               index=index+2;
-               break;
-           }
-           default:
-           {
-             total=total+(Integer.parseInt(num.substring(index, index+1)));
-           }
-       }
-        System.out.println("The string:"+num);
-        System.out.println("Total:"+total);
-    }
-}
-</pre>
-<p>By using the example of  : 12y34x56 answer is 14 how : 1 + 2 + 5 + 6 = 14. We are able to observe and create a logic by manipulating the character position of the statement itself such in this way that I have decided to use the String data type to manipulate the logic to produce the FLAG.</p>
-<blockquote>
-<table border="1" class="docutils">
-<colgroup>
-<col width="76%">
-<col width="3%">
-<col width="3%">
-<col width="3%">
-<col width="3%">
-<col width="3%">
-<col width="3%">
-<col width="3%">
-<col width="3%">
-</colgroup>
-<tbody valign="top">
-<tr><td>Character position/number:</td>
-<td>0</td>
-<td>1</td>
-<td>2</td>
-<td>3</td>
-<td>4</td>
-<td>5</td>
-<td>6</td>
-<td>7</td>
-</tr>
-<tr><td>Character:</td>
-<td>1</td>
-<td>2</td>
-<td>y</td>
-<td>3</td>
-<td>4</td>
-<td>x</td>
-<td>5</td>
-<td>6</td>
-</tr>
-</tbody>
-</table>
-</blockquote>
-<p>Based on figure above, when the switch-case encounters a non-x or y character the program will execute the default statement of</p>
-<pre class="literal-block">
-"total=total+(Integer.parseInt(num.substring(index, index+1)));"
-</pre>
-<p>where by converting the character within the string at the character position into an integer data type and add the following digit into the total variable. Meanwhile, if the switch-case either meets an x character the following statement occurs:</p>
-<pre class="literal-block">
-num=num.substring(0, index)+num.substring(index+1,num.length());
-num_length=num.length();
-index=index-2;
-</pre>
-<p>Translation, the program will create a new string that will override the previous string with the deletion of the "x" character at that particular character position and at the same time moves back 2 spaces in the character position index. Same situation occurs in "y" except the character position is moved 2 spaces front. Thus once the program has reached the end, the FLAG sum is printed.</p>
-<p>The flag is: <strong>557</strong></p>
+    <div><p><strong>Web 2 - 200 points</strong></p>
+<p>We were given a url to the challenge and this is what it displays:</p>
+<img alt="/galleries/Selection_063.png" src="../galleries/Selection_063.png">
+<p>It's quite clear that you either need to know the credentials or to register. So, we chose the <strong>register</strong> route. We first tried logging with our own crafted credentials. But we were unable to <strong>view</strong> the flag that way. Thus, chose to register as admin afterwards. Of course, we chose a password that is unique for us. ;)</p>
+<img alt="/galleries/Selection_064.png" src="../galleries/Selection_064.png">
+<p>And well surprise...it was accepted!! AWESOME!</p>
+<img alt="/galleries/Selection_065.png" src="../galleries/Selection_065.png">
+<p>After we login we can see that the post named <strong>flag</strong> now has an option for us to <strong>view</strong> the post!</p>
+<img alt="/galleries/Selection_066.png" src="../galleries/Selection_066.png">
+<p>So, we clicked on the <strong>view</strong> link and out comes the javascript alert function that gave us the <strong>flag</strong>.</p>
+<p>The flag is: <strong>ChutkiisVERYcute</strong></p>
 </div>
     
     <ul class="pager">
         <li class="previous">
-            <a href="hackim-2013-programming-300-writeup.html">← Previous post</a>
+            <a href="hackim-2013-programming-400-writeup.html">← Previous post</a>
         </li>
         <li class="next">
-            <a href="hackim-2013-web-200-writeup.html">Next post →</a>
+            <a href="hackim-2013-web-300-writeup.html">Next post →</a>
         </li>
     </ul>
 
@@ -204,9 +117,9 @@ index=index-2;
         <div id="disqus_thread"></div>
         <script type="text/javascript">
         var disqus_shortname ="apu-csfc";
-            var disqus_url="http://apu-csfc.github.com/posts/hackim-2013-programming-400-writeup.html";
-        var disqus_title="HackIM 2013 - Programming 400 WriteUp";
-        var disqus_identifier="cache/posts/hackim-2013-programming-400-writeup.html";
+            var disqus_url="http://apu-csfc.github.com/posts/hackim-2013-web-200-writeup.html";
+        var disqus_title="HackIM 2013 - Web 200 WriteUp";
+        var disqus_identifier="cache/posts/hackim-2013-web-200-writeup.html";
         var disqus_config = function () { 
             this.language = "en";
         };

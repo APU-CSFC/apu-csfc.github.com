@@ -1,0 +1,32 @@
+.. title: HackIM 2013 - Web 200 WriteUp
+.. slug: hackim-2013-web-200-writeup
+.. date: 2013/03/02 18:10:28
+.. tags: CTF, nullcon, HackIM, WriteUps
+.. link: 
+.. description: WriteUp for nullcon HackIM CTF Web 200.
+
+**Web 2 - 200 points**
+
+We were given a url to the challenge and this is what it displays:
+
+.. image:: /galleries/Selection_063.png
+    :scale: 50
+
+It's quite clear that you either need to know the credentials or to register. So, we chose the **register** route. We first tried logging with our own crafted credentials. But we were unable to **view** the flag that way. Thus, chose to register as admin afterwards. Of course, we chose a password that is unique for us. ;)
+
+.. image:: /galleries/Selection_064.png
+    :scale: 50
+
+And well surprise...it was accepted!! AWESOME!
+
+.. image:: /galleries/Selection_065.png
+    :scale: 50
+
+After we login we can see that the post named **flag** now has an option for us to **view** the post! 
+
+.. image:: /galleries/Selection_066.png
+    :scale: 50
+
+So, we clicked on the **view** link and out comes the javascript alert function that gave us the **flag**.
+
+The flag is: **ChutkiisVERYcute**

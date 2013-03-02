@@ -1,0 +1,44 @@
+.. title: HackIM 2013 - Web 300 WriteUp
+.. slug: hackim-2013-web-300-writeup
+.. date: 2013/03/02 18:28:06
+.. tags: CTF, nullcon, HackIM, WriteUps
+.. link: 
+.. description: WriteUp for nullcon HackIM CTF Web 300.
+
+**Web 3 - 300 points**
+
+Again, like `Web 2 - 200 points </posts/hackim-2013-web-200-writeup.html>`_ we were given a link to the challenge. And this is what it displays:
+
+.. image:: /galleries/Selection_071.png
+    :scale: 50
+
+From the page, it seems we are in trouble. But of course, have no fear! We checked the hints and it was given that the hint to this problem was to **enumerate**....now..that's interesting. :)
+
+So, now, we *Google*! By googling **enumerate computer** we get (quote from Wikipedia):
+
+    A Network enumerator or network scanner is a computer program used to retrieve user names, and info on groups, shares and services of networked computers.
+
+Now, that gave us the idea of finding the much needed piece of the puzzle using specific filtering of Google searches directed to *ctf.nullcon.net* :)
+
+    site:ctf.nullcon.net inurl:login
+
+The returned search results pointed us to an interesting phps file. A phps file is a source of the php file. So, from there, we changed the file **login.php** to **login.phps**, and we got this:
+
+.. image:: /galleries/Selection_072.png
+    :scale: 50
+
+By looking at the php source file, we know that the login checks whether there is a variable called **Login** is set in the **POST** request. And since the login page wasn't checking whether the credentials were correct or not, we used curl to solve the challenge as follows::
+
+   curl --cookie "Login=1" http://ctf.nullcon.net/challenges/web/web4/onepage.php
+
+And the returned response was as follows::
+
+    <html>
+    <head>
+    </head>
+    <body>
+    <h1>The flag is JagguisaNAUGHTYbunder</h1>
+    </body>
+    </html>
+
+command line tools FTW! :)

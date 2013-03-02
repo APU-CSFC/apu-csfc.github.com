@@ -1,0 +1,25 @@
+.. title: HackIM 2013 - Web 400 WriteUp
+.. slug: hackim-2013-web-400-writeup
+.. date: 2013/03/02 18:59:06
+.. tags: CTF, nullcon, HackIM, WriteUps
+.. link: 
+.. description: WriteUp for nullcon HackIM CTF Web 400.
+
+**Web 4 - 400 points**
+
+Again, like `Web 2 - 200 points </posts/hackim-2013-web-200-writeup.html>`_  and `Web 3 - 300 points </posts/hackim-2013-web-300-writeup.html>`_ we were given a link to the challenge. And this is what it displays:
+
+.. image:: /galleries/Selection_070.png
+    :scale: 50
+
+So, we applied the same technique as **Web 2 - 200 points**, registered as **admin** with our own unique passphrase, and log in. After we login, we were given a mail sending feature:
+
+.. image:: /galleries/Selection_068.png
+    :scale: 50
+
+Here, if you didn't login as admin, you would not be able to use the **Become Admin** and **Get Flag** functions. So, we went right ahead and clicked the **Get Flag** function and this spits out for us:
+
+.. image:: /galleries/Selection_069.png
+    :scale: 50
+
+AWESOMENESS! :)
