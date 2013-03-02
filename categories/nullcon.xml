@@ -1,5 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>APU CSFC (nullcon)</title><link>http://apu-csfc.github.com</link><description>APU Cyber Security &amp; Forensics Club</description><lastBuildDate>Wed, 06 Feb 2013 01:26:46 GMT</lastBuildDate><generator>nikola</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>HackIM 2013 - RE 100 WriteUp</title><link>http://apu-csfc.github.com/posts/hackim-2013-re-100-writeup.html</link><description>&lt;div&gt;&lt;p&gt;RE 1
+<rss version="2.0"><channel><title>APU CSFC (nullcon)</title><link>http://apu-csfc.github.com</link><description>APU Cyber Security &amp; Forensics Club</description><lastBuildDate>Sat, 02 Mar 2013 14:41:46 GMT</lastBuildDate><generator>nikola</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>HackIM 2013 - Programming 400 WriteUp</title><link>http://apu-csfc.github.com/posts/hackim-2013-programming-400-writeup.html</link><description>&lt;div&gt;&lt;p&gt;&lt;strong&gt;Programming 4 - 400 points&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt; interpret and give answer. start reading from left if digit then add the digit. if x then remove it and go back 2 places if y then remove and go front 2 places&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;example : 12y34x56 answer is 14&lt;/p&gt;
+&lt;p&gt;how : 1 + 2 + 5 + 6 = 14&lt;/p&gt;
+&lt;p&gt;12y34x5612345678910xy0981235432x4765893x219532y875439664y3x
+2345688x754312x2456x7876554x43y324x6778y7643223457789494x98696763y15348798y765341y1878979&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre class="literal-block"&gt;
+public class FunkyText {
+
+/** * @param args the command line arguments */
+public static void main(String[] args) {
+    // TODO code application logic here
+    String num="12y34x5612345678910xy0981235432x4765893x219532y875439664y3x2345688x754312x2456x7876554x43y324x6778y7643223457789494x98696763y15348798y765341y1878979";
+
+    int total=0;
+    int num_length=num.length();
+    for(int index=0;index&amp;lt;num_length;index++)
+    {
+        System.out.println("index:"+index);
+       switch(num.charAt(index))
+       {
+           case 'x':
+           {
+               num=num.substring(0, index)+num.substring(index+1,num.length());
+               num_length=num.length();
+               index=index-2;
+               break;
+           }
+
+           case 'y':
+           {
+               num=num.substring(0, index)+num.substring(index+1,num.length());
+               num_length=num.length();
+               index=index+2;
+               break;
+           }
+           default:
+           {
+             total=total+(Integer.parseInt(num.substring(index, index+1)));
+           }
+       }
+        System.out.println("The string:"+num);
+        System.out.println("Total:"+total);
+    }
+}
+&lt;/pre&gt;
+&lt;p&gt;By using the example of  : 12y34x56 answer is 14 how : 1 + 2 + 5 + 6 = 14. We are able to observe and create a logic by manipulating the character position of the statement itself such in this way that I have decided to use the String data type to manipulate the logic to produce the FLAG.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;table border="1" class="docutils"&gt;
+&lt;colgroup&gt;
+&lt;col width="76%"&gt;
+&lt;col width="3%"&gt;
+&lt;col width="3%"&gt;
+&lt;col width="3%"&gt;
+&lt;col width="3%"&gt;
+&lt;col width="3%"&gt;
+&lt;col width="3%"&gt;
+&lt;col width="3%"&gt;
+&lt;col width="3%"&gt;
+&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td&gt;Character position/number:&lt;/td&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;7&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Character:&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;x&lt;/td&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Based on figure above, when the switch-case encounters a non-x or y character the program will execute the default statement of&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+"total=total+(Integer.parseInt(num.substring(index, index+1)));"
+&lt;/pre&gt;
+&lt;p&gt;where by converting the character within the string at the character position into an integer data type and add the following digit into the total variable. Meanwhile, if the switch-case either meets an x character the following statement occurs:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+num=num.substring(0, index)+num.substring(index+1,num.length());
+num_length=num.length();
+index=index-2;
+&lt;/pre&gt;
+&lt;p&gt;Translation, the program will create a new string that will override the previous string with the deletion of the "x" character at that particular character position and at the same time moves back 2 spaces in the character position index. Same situation occurs in "y" except the character position is moved 2 spaces front. Thus once the program has reached the end, the FLAG sum is printed.&lt;/p&gt;
+&lt;p&gt;The flag is: &lt;strong&gt;557&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;</description><guid>http://apu-csfc.github.com/posts/hackim-2013-programming-400-writeup.html</guid><pubDate>Sat, 02 Mar 2013 05:08:00 GMT</pubDate></item><item><title>HackIM 2013 - Programming 300 WriteUp</title><link>http://apu-csfc.github.com/posts/hackim-2013-programming-300-writeup.html</link><description>&lt;div&gt;&lt;p&gt;&lt;strong&gt;Programming 3 - 300 points&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt; So our folks wanted to work on binomial series but they understood incorrectly so they made a series of this type.
+if series is for 10 numbers&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+10/1 + 9/2 + 8/3 ..... 1/10 = 22.218
+round to 2 decimal place = 22.21
+&lt;/pre&gt;
+&lt;p&gt;now they did calculated this series for 31337 numbers can you help these guys in finding the number again.&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+public class Binomial {
+    static final int number=31337; // The binominal value that we are searching for based on the requirements.
+    /** * @param args the command line arguments */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        double sum=0; // sum is declared and initialised with the value of zero.
+        for(int ctr=1;ctr&amp;lt;=number;ctr++)
+        {
+            sum=sum+(((number+1)-ctr)/ctr);  // The method of calculation used.
+    // e.g.  Term 1: sum=0+(((31337+1)-1)/1),
+    // Term 2: sum=31337+(((31337+1)-2)/2), ...,
+    //Term 31337: sum=311180.64640351594+(((31337+1)-31337)/31337)
+        }
+        System.out.printf("%.2f\n",sum); // Round off to two decimal places.
+    }
+}
+&lt;/pre&gt;
+&lt;p&gt;The flag is: &lt;strong&gt;311180.65&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;</description><guid>http://apu-csfc.github.com/posts/hackim-2013-programming-300-writeup.html</guid><pubDate>Sat, 02 Mar 2013 05:00:33 GMT</pubDate></item><item><title>HackIM 2013 - Programming 100 WriteUp</title><link>http://apu-csfc.github.com/posts/hackim-2013-prog1-writeup.html</link><description>&lt;div&gt;&lt;p&gt;&lt;strong&gt;Programming 1 - 100 points&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt; Calculate 150000th Fibonacci series, and flag is sum of the alternate numbers from answers.&lt;/p&gt;
+&lt;p&gt;We interpreted the question as: &lt;em&gt;Calculate 150000th Fibonacci series&lt;/em&gt;, rather than the original. ;)&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+package fibonacchi;
+
+import java.io.File;
+import java.io.PrintWriter;
+import java.math.BigInteger;
+
+final static int Fibonacchi_term=150000; // The Term that we are looking for.
+
+public class Fibonacchi {
+
+    /** * @param args the command line arguments  */
+    public static void main(String[] args) throws Exception {
+        // TODO code application logic here
+        BigInteger obj1 = new BigInteger("0"); // Fibonachi's First Term
+        BigInteger obj2 = new BigInteger("1"); // Fibonachi's Second Term
+        BigInteger obj3; // Fibonachi's Third term and so on until 150,000's Term
+        obj3=obj2.add(obj1);
+        for(int n=1;n&amp;lt;=(Fibonacchi_term-2);n++) // 150,000 Term - 2 which is stated from obj1 and obj2 from the beginning which is 0 and 1.
+        {
+            obj1=obj2;
+            obj2=obj3;
+            obj3=obj2.add(obj1);
+        }
+        File fileobj = new File("output.txt"); // Exporting the result to an external file named output.txt, reason being the number is huge.
+        PrintWriter output=new PrintWriter(fileobj);
+        output.println(obj3); // Print the result of the term into the file.
+        output.close();
+    }
+}
+&lt;/pre&gt;
+&lt;p&gt;The reason being that &lt;strong&gt;BigInteger&lt;/strong&gt; was implemented in this code instead of using either &lt;strong&gt;int&lt;/strong&gt;, &lt;strong&gt;double&lt;/strong&gt; or &lt;strong&gt;long&lt;/strong&gt; is because is to prevent an &lt;strong&gt;overflow&lt;/strong&gt; due to the huge number that it is produced at the end of the term's calculation (The maximum value of the data type of long is 9223372036854775807, hence anything higher causes an overflow which in result producing inaccurate answer/FLAG). Therefore, &lt;strong&gt;BigInteger&lt;/strong&gt; is used due to the fact it is able to adjust its size to accommodate the value of the calculation and produce the final answer/FLAG without facing any overflow.&lt;/p&gt;
+&lt;/div&gt;</description><guid>http://apu-csfc.github.com/posts/hackim-2013-prog1-writeup.html</guid><pubDate>Sat, 02 Mar 2013 04:36:41 GMT</pubDate></item><item><title>HackIM 2013 - RE 100 WriteUp</title><link>http://apu-csfc.github.com/posts/hackim-2013-re-100-writeup.html</link><description>&lt;div&gt;&lt;p&gt;RE 1
 Description: - challenge-1 - challenge.do&lt;/p&gt;
 &lt;p&gt;So, after downloading &lt;em&gt;challenge.do&lt;/em&gt; and opening it up, we were presented with this:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
@@ -54,5 +214,5 @@ This showed up,&lt;/p&gt;
 &lt;p&gt;GliderSwirley was formed out of that same university and the same core members who run APU CSFC as well. We were unsatisfied with how there was a lack of Information Security and Forensics awareness, so we thought, the first step towards learning about InfoSec is to participate in CTFs and do InfoSec stuff.&lt;/p&gt;
 &lt;p&gt;Thus, GliderSwirley has been participating in CTFs with only 3-4 persons for a little over 3 months and a few months before APU CSFC was officialised/founded in APU. We do welcome other rookie players to collaborate with us as well. :)&lt;/p&gt;
 &lt;p&gt;The start of this year for GliderSwirley was pretty much &lt;em&gt;awesome&lt;/em&gt;, to be honest, managed to grow to a 6 person team and participated in &lt;a class="reference external" href="http://ctf.nullcon.net/home.php"&gt;nullcon HackIM CTF&lt;/a&gt;, scored 5200 points and placed 23rd overall. Not bad for the 0xn00bs, eh? :P&lt;/p&gt;
-&lt;p&gt;[Note} There will be a series of writeups for the challenges we've managed to solve at HackIM CTF following this post.&lt;/p&gt;
+&lt;p&gt;[Note] There will be a series of writeups for the challenges we've managed to solve at HackIM CTF following this post.&lt;/p&gt;
 &lt;/div&gt;</description><guid>http://apu-csfc.github.com/posts/another-year-another-start-nullcon-hackim-and-glider-swirley.html</guid><pubDate>Tue, 05 Feb 2013 22:56:57 GMT</pubDate></item></channel></rss>

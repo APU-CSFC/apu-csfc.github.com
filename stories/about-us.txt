@@ -6,4 +6,8 @@
 .. description: About APU Cyber Security & Forensics Club
 
 
-We are students from Asia Pacific University of Technology & Innovation.
+We are students from `Asia Pacific University of Technology & Innovation (APU) <http://www.apuniversity.edu.my/>`_.
+
+**APU CSFC** - APU Cyber Security & Forensics Club.
+
+We collectively play CTFs online internationally as `Glider Swirley <https://ctftime.org/team/3132/>`_ with a few other students from different universities.
