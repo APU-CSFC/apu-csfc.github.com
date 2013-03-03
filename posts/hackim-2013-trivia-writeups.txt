@@ -1,0 +1,71 @@
+.. title: HackIM 2013 - Trivia WriteUps
+.. slug: hackim-2013-trivia-writeups
+.. date: 2013/03/03 20:24:37
+.. tags: CTF, nullcon, HackIM, WriteUps 
+.. link: 
+.. description: WriteUp for Nullcon HackIM CTF all Trivia challenges
+
+**Trivia 1-5 - 100-500 points**
+
+Trivia questions are something that we look forward to in almost all Jeopardy style CTFs that we participate, although some CTFs do not actually give questions like how HackIM did.
+
+Trivia 1 - 100 points
+---------------------
+
+**Challenge Question**
+
+    What feature, introduced in DirectX 11, makes in-game textures appear rounder and better defined?
+
+**Flag**
+    
+    Tesellation
+
+Ref: `http://www.maximumpc.com/article/features/directx_11_deconstructed <http://www.maximumpc.com/article/features/directx_11_deconstructed>`_
+
+Trivia 2 - 200 points
+---------------------
+
+**Challenge Question**
+
+    What socket was used in the first Sandy Bridge chips?
+
+**Flag**
+
+    LGA1155
+
+Trivia 3 - 300 points
+---------------------
+
+**Challenge Question**
+
+    Which computer program was written in February 1991 by 3 authors?
+
+**Flag**
+
+    polyglot
+
+Trivia 4 - 400 points
+---------------------
+
+**Challenge Question**
+
+    What is an emergent micro-cooling solution that operates similarly to conventional heat pipe technology known as?
+
+**Flag**
+
+    nanowick
+
+Ref: `http://www.purdue.edu/newsroom/research/2010/100722GarimellaNanowick.html <http://www.purdue.edu/newsroom/research/2010/100722GarimellaNanowick.html>`_
+
+Trivia 5 - 500 points
+---------------------
+
+**Challenge Question**
+
+    What is the first 4 bytes in a neXT fat binary?
+
+**Flag**
+
+    cafe babe
+
+Ref: `https://en.wikipedia.org/wiki/Hexspeak <https://en.wikipedia.org/wiki/Hexspeak>`_
