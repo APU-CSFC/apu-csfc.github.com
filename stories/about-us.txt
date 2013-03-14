@@ -10,4 +10,14 @@ We are students from `Asia Pacific University of Technology & Innovation (APU) <
 
 **APU CSFC** - APU Cyber Security & Forensics Club.
 
+Our Aim and Objective:
+
+    To foster an environment for learning, support, friendship and mentorship for Information Security and Digital Forensics students.
+
+    To represent A.P.U at security competitions and workshops nationwide and internationally.
+
+    To solve Security and Forensic challenges creatively.
+
+    And to focus on the protection of Information Systems.
+
 We collectively play CTFs online internationally as `Glider Swirley <https://ctftime.org/team/3132/>`_ with a few other students from different universities.
